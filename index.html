@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Check: Edición Especial ✨</title>
+    <!-- Tailwind CSS para diseño responsivo y utilidades -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans y Outfit para una tipografía moderna y cálida -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Configuración de fuentes base y fondo Y2K dreamy (PinkPantheress / Alt-pop suave) */
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #fce7f3 0%, #ede9fe 48%, #e0f2fe 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .font-display {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Animaciones suaves para transiciones de tarjetas y elementos flotantes */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(3deg); }
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(192, 132, 252, 0.4); }
+            50% { box-shadow: 0 0 0 12px rgba(192, 132, 252, 0); }
+        }
+
+        .animate-float {
+            animation: floatSlow 6s ease-in-out infinite;
+        }
+
+        .animate-float-delayed {
+            animation: floatSlow 7s ease-in-out 2s infinite;
+        }
+
+        .card-enter {
+            animation: fadeSlideUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .btn-glow {
+            animation: pulseGlow 2.5s infinite;
+        }
+
+        /* Estilo glassmorphism para la tarjeta principal */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 20px 45px -15px rgba(139, 92, 246, 0.14), 0 8px 20px -8px rgba(244, 114, 182, 0.1);
+        }
+
+        /* Efecto táctil y hover en botones de opción */
+        .option-btn {
+            transition: all 0.22s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .option-btn:hover {
+            transform: translateY(-2px);
+            border-color: #c084fc;
+            background-color: #faf5ff;
+        }
+        .option-btn:active {
+            transform: scale(0.98);
+        }
+        .option-selected {
+            background: linear-gradient(135deg, #fdf2f8 0%, #ede9fe 55%, #e0f2fe 100%) !important;
+            border-color: #a855f7 !important;
+            box-shadow: 0 6px 16px -4px rgba(168, 85, 247, 0.22);
+        }
+        /* Estilo sutil tipo CD / reproductor Y2K */
+        .y2k-cover {
+            box-shadow: 0 10px 25px -5px rgba(236, 72, 153, 0.28), inset 0 0 0 1px rgba(255,255,255,0.6);
+        }
+    </style>
+</head>
+<body class="text-slate-800 flex items-center justify-center p-4 sm:p-6 relative selection:bg-purple-200 selection:text-purple-900">
+
+    <!-- Elementos decorativos de fondo Y2K & Sky Heroic (Orbes suaves) -->
+    <div class="fixed top-[-10%] left-[-10%] w-72 h-72 bg-pink-300/35 rounded-full blur-3xl pointer-events-none animate-float"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-80 h-80 bg-sky-300/35 rounded-full blur-3xl pointer-events-none animate-float-delayed"></div>
+    <div class="fixed top-[35%] right-[5%] w-52 h-52 bg-purple-300/30 rounded-full blur-3xl pointer-events-none"></div>
+
+    <!-- Contenedor principal -->
+    <main class="w-full max-w-md mx-auto relative z-10">
+        
+        <!-- Notificación flotante (Toast) para reemplazar alert() -->
+        <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-all duration-300 transform -translate-y-4">
+            <div class="bg-slate-900/90 text-white text-sm font-medium px-5 py-3 rounded-full shadow-xl flex items-center gap-2 backdrop-blur-md">
+                <span id="toast-icon">✨</span>
+                <span id="toast-msg">¡Respuestas copiadas!</span>
+            </div>
+        </div>
+
+        <!-- Tarjeta Glassmorphism -->
+        <div class="glass-card rounded-3xl p-6 sm:p-8 overflow-hidden relative">
+            
+            <!-- PANTALLA 1: BIENVENIDA -->
+            <section id="welcome-screen" class="text-center card-enter">
+                <!-- Arte visual estilo PinkPantheress / Y2K con fallback seguro -->
+                <div class="relative w-28 h-28 mx-auto mb-5 animate-float">
+                    <img 
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/PinkPantheress_in_2023_%28cropped%29.jpg/440px-PinkPantheress_in_2023_%28cropped%29.jpg" 
+                        alt="PinkPantheress aesthetic" 
+                        onerror="this.onerror=null; this.src='https://placehold.co/300x300/f472b6/ffffff?text=Y2K+Vibes+%F0%9F%8E%A7';"
+                        class="w-full h-full object-cover rounded-2xl y2k-cover border-2 border-white"
+                    >
+                    <span class="absolute -bottom-2 -right-2 bg-white text-xs font-bold px-2.5 py-1 rounded-full shadow-md border border-pink-100 text-pink-500">
+                        ▶ 01:48
+                    </span>
+                </div>
+
+                <h1 class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-2.5 leading-tight">
+                    mini vibe check <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-sky-500">✨</span>
+                </h1>
+
+                <p class="text-slate-600 text-sm sm:text-base leading-relaxed mb-6">
+                    hice este mini test rápido para ver qué onda con nuestros gustos y qué tanto coincidimos jaja
+                </p>
+
+                <!-- Mini reproductor decorativo Y2K -->
+                <div class="bg-white/80 rounded-2xl p-3.5 mb-7 border border-pink-100/90 flex items-center gap-3 text-left shadow-xs">
+                    <img 
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/PinkPantheress_in_2023_%28cropped%29.jpg/440px-PinkPantheress_in_2023_%28cropped%29.jpg" 
+                        alt="Now playing" 
+                        onerror="this.onerror=null; this.src='https://placehold.co/100x100/c084fc/ffffff?text=%E2%99%AB';"
+                        class="w-11 h-11 rounded-xl object-cover flex-shrink-0"
+                    >
+                    <div class="flex-1 min-w-0">
+                        <p class="text-xs font-bold text-slate-800 truncate">son 20 preguntas rápidas</p>
+                        <p class="text-[11px] text-slate-500 truncate">elige lo primero que te vibre, sin pensarle mucho</p>
+                    </div>
+                    <span class="text-pink-400 text-sm font-bold pr-1">♪</span>
+                </div>
+
+                <button id="start-btn" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-sky-500 hover:from-pink-600 hover:via-purple-600 hover:to-sky-600 text-white font-display font-bold text-lg shadow-lg shadow-purple-500/30 transition-all duration-200 active:scale-95 btn-glow flex items-center justify-center gap-2 cursor-pointer">
+                    <span>empezar</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </section>
+
+            <!-- PANTALLA 2: PREGUNTAS DEL QUIZ -->
+            <section id="quiz-screen" class="hidden">
+                <!-- Barra superior de progreso y navegación -->
+                <div class="flex items-center justify-between mb-3">
+                    <button id="prev-btn" class="text-slate-400 hover:text-slate-700 p-2 -ml-2 rounded-xl transition-colors flex items-center gap-1 text-sm font-medium cursor-pointer disabled:opacity-0 disabled:pointer-events-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                        </svg>
+                        atrás
+                    </button>
+                    <span id="progress-text" class="text-xs font-bold tracking-wider text-purple-600 bg-purple-100/80 px-3 py-1 rounded-full">
+                        1 / 20
+                    </span>
+                </div>
+
+                <!-- Barra visual de progreso -->
+                <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden mb-6">
+                    <div id="progress-bar" class="h-full bg-gradient-to-r from-pink-400 via-purple-500 to-sky-400 rounded-full transition-all duration-500 ease-out" style="width: 5%;"></div>
+                </div>
+
+                <!-- Barra visual de progreso -->
+                <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden mb-6">
+                    <div id="progress-bar" class="h-full bg-gradient-to-r from-pink-400 via-purple-500 to-sky-400 rounded-full transition-all duration-500 ease-out" style="width: 12.5%;"></div>
+                </div>
+
+                <!-- Contenedor animado de la pregunta actual -->
+                <div id="question-container" class="card-enter">
+                    <div class="mb-2">
+                        <span id="question-tag" class="text-xs font-semibold text-pink-500 tracking-wide">01</span>
+                    </div>
+                    <h2 id="question-title" class="font-display text-xl sm:text-2xl font-bold text-slate-900 leading-snug mb-6">
+                        ¿Cuál fue tu primera impresión cuando empezamos a hablar?
+                    </h2>
+
+                    <!-- Lista de opciones -->
+                    <div id="options-list" class="space-y-3">
+                        <!-- Las opciones se inyectan dinámicamente vía JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- PANTALLA 3: RESULTADOS Y ENVÍO -->
+            <section id="result-screen" class="hidden card-enter">
+                <div class="text-center mb-6">
+                    <div class="relative w-20 h-20 mx-auto mb-3">
+                        <img 
+                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/PinkPantheress_in_2023_%28cropped%29.jpg/440px-PinkPantheress_in_2023_%28cropped%29.jpg" 
+                            alt="Resultado" 
+                            onerror="this.onerror=null; this.src='https://placehold.co/200x200/f472b6/ffffff?text=%E2%9C%A8';"
+                            class="w-full h-full object-cover rounded-2xl y2k-cover border-2 border-white"
+                        >
+                        <span id="result-emoji" class="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center text-base">
+                            ✨
+                        </span>
+                    </div>
+                    <h2 id="result-title" class="font-display text-2xl sm:text-3xl font-extrabold text-slate-900 mb-2">
+                        sintonía de lujo ✨
+                    </h2>
+                    <p id="result-desc" class="text-sm sm:text-base text-slate-600 leading-relaxed">
+                        definitivamente hay una vibra súper natural aquí, la plática fluye sola.
+                    </p>
+                </div>
+
+                <!-- Resumen compacto de sus respuestas -->
+                <div class="bg-slate-50/90 border border-slate-200/70 rounded-2xl p-4 mb-5">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-bold text-slate-500">lo que elegiste</span>
+                        <span class="text-xs text-purple-600 font-semibold">20/20</span>
+                    </div>
+                    <ul id="summary-list" class="space-y-2 text-xs sm:text-sm text-slate-700 max-h-48 overflow-y-auto pr-1">
+                        <!-- Resumen generado por JS -->
+                    </ul>
+                </div>
+
+                <!-- Campo opcional de nota extra -->
+                <div class="mb-6">
+                    <label for="extra-note" class="block text-sm font-semibold text-slate-800 mb-1.5">
+                        ¿alguna canción o comentario extra? <span class="text-slate-400 font-normal">(opcional)</span>
+                    </label>
+                    <textarea id="extra-note" rows="2" placeholder="ej. me recordó a tal canción o cualquier cosa..." class="w-full rounded-2xl border border-slate-200 bg-white/90 px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-200 transition-all resize-none"></textarea>
+                </div>
+
+                <!-- Botones de acción (WhatsApp y Copiar) -->
+                <div class="space-y-3">
+                    <button id="whatsapp-btn" class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-display font-bold text-base shadow-lg shadow-emerald-500/25 transition-all duration-200 active:scale-95 flex items-center justify-center gap-2.5 cursor-pointer">
+                        <span>mandármelo por WhatsApp 💬</span>
+                    </button>
+
+                    <button id="copy-btn" class="w-full py-3.5 px-5 rounded-2xl bg-white hover:bg-pink-50/80 text-slate-800 border-2 border-slate-200 hover:border-pink-300 font-display font-bold text-base transition-all duration-200 active:scale-95 flex items-center justify-center gap-2 cursor-pointer">
+                        <span>copiar respuestas 📋</span>
+                    </button>
+                </div>
+
+                <!-- Botón discreto para reiniciar -->
+                <div class="mt-4 text-center">
+                    <button id="restart-btn" class="text-xs font-medium text-slate-400 hover:text-slate-600 underline underline-offset-4 transition-colors cursor-pointer">
+                        volver a hacerlo
+                    </button>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script>
+        /**
+         * Configuración de las 20 preguntas discretas personalizadas:
+         * estética PinkPantheress, vibras cotidianas y guiños muy sutiles a series/anime.
+         */
+        const quizData = [
+            {
+                tag: "01 • primera impresión",
+                shortLabel: "primera impresión",
+                question: "¿Cuál fue tu primera impresión cuando empezamos a hablar?",
+                options: [
+                    { text: "pensé que eras muy chill / buena onda", emoji: "☁️", points: 3 },
+                    { text: "me cayó súper bien tu vibra al instante", emoji: "✨", points: 4 },
+                    { text: "sentí que teníamos gustos parecidos", emoji: "🎧", points: 3 },
+                    { text: "me dio curiosidad conocerte más", emoji: "👀", points: 4 }
+                ]
+            },
+            {
+                tag: "02 • soundtrack",
+                shortLabel: "mood PinkPantheress",
+                question: "Si nuestra vibra fuera una canción de PinkPantheress, ¿cuál sería el mood?",
+                options: [
+                    { text: "algo súper chill para platicar horas", emoji: "🌙", points: 4 },
+                    { text: "un beat pegajoso que te alegra el día", emoji: "💿", points: 3 },
+                    { text: "un tema que pones en repeat sin darte cuenta", emoji: "🔁", points: 4 },
+                    { text: "aún estamos armando la playlist", emoji: "🎶", points: 2 }
+                ]
+            },
+            {
+                tag: "03 • dinámica",
+                shortLabel: "tipo de dúo",
+                question: "Si fuéramos personajes de alguna serie o anime, ¿qué tipo de dúo seríamos?",
+                options: [
+                    { text: "los que hacen buen equipo sin siquiera planearlo", emoji: "⚡", points: 4 },
+                    { text: "los que se la pasan platicando y bromeando de todo", emoji: "😄", points: 3 },
+                    { text: "uno con una idea random y el otro siguiéndole la corriente", emoji: "🌀", points: 3 },
+                    { text: "un dúo que apenas va empezando su arco", emoji: "🌟", points: 4 }
+                ]
+            },
+            {
+                tag: "04 • sintonía",
+                shortLabel: "fluidez de plática",
+                question: "Cuando estamos platicando, ¿cómo sientes que pasa el tiempo?",
+                options: [
+                    { text: "se pasa volando sin darme cuenta", emoji: "⏳", points: 4 },
+                    { text: "súper cómodo y natural", emoji: "💫", points: 4 },
+                    { text: "siempre sale algún tema random bueno", emoji: "💬", points: 3 },
+                    { text: "tranquilo, paso a paso", emoji: "🌤️", points: 2 }
+                ]
+            },
+            {
+                tag: "05 • detalles",
+                shortLabel: "recuerdos del día",
+                question: "¿Qué es lo que más fácil hace que te acuerdes de mí en el día?",
+                options: [
+                    { text: "una canción o algo que estamos viendo", emoji: "🎧", points: 4 },
+                    { text: "un meme o algo gracioso", emoji: "🤭", points: 3 },
+                    { text: "alguna plática que tuvimos", emoji: "💭", points: 3 },
+                    { text: "cuando veo algo que sé que te gustaría", emoji: "✨", points: 4 }
+                ]
+            },
+            {
+                tag: "06 • mensajes",
+                shortLabel: "notificaciones",
+                question: "Cuando ves un mensaje mío en tu celular, ¿qué suele pasar?",
+                options: [
+                    { text: "me saca una sonrisa automática", emoji: "😊", points: 4 },
+                    { text: "me dan ganas de contestar rápido para seguir la plática", emoji: "⚡", points: 4 },
+                    { text: "sé que viene algo entretenido o random", emoji: "🎲", points: 3 },
+                    { text: "me da buena vibra verlo", emoji: "☁️", points: 3 }
+                ]
+            },
+            {
+                tag: "07 • música",
+                shortLabel: "gustos musicales",
+                question: "¿Qué tanto sientes que coinciden nuestros gustos musicales?",
+                options: [
+                    { text: "demasiado, podríamos compartir playlist", emoji: "💿", points: 4 },
+                    { text: "bastante, siempre tienes buenas recomendaciones", emoji: "🎧", points: 4 },
+                    { text: "tenemos lo justo para descubrir música nueva juntos", emoji: "🎶", points: 3 },
+                    { text: "todavía nos falta intercambiar más canciones", emoji: "📻", points: 2 }
+                ]
+            },
+            {
+                tag: "08 • series",
+                shortLabel: "opening / intro",
+                question: "Si nuestra amistad/historia tuviera un opening de serie, ¿cómo sería?",
+                options: [
+                    { text: "alegre, con mucha energía y buenos momentos", emoji: "☀️", points: 4 },
+                    { text: "aesthetic, nocturno y con música tranquila", emoji: "🌃", points: 4 },
+                    { text: "divertido, lleno de escenas improvisadas", emoji: "🎬", points: 3 },
+                    { text: "de esos que no te saltas nunca", emoji: "⏭️", points: 4 }
+                ]
+            },
+            {
+                tag: "09 • confianza",
+                shortLabel: "nivel de confianza",
+                question: "¿Qué tan fácil te resulta contarme cosas random de tu día?",
+                options: [
+                    { text: "súper fácil, siento mucha confianza", emoji: "🫧", points: 4 },
+                    { text: "bastante, contigo no tengo que pensar qué decir", emoji: "💬", points: 4 },
+                    { text: "poco a poco me voy soltando más", emoji: "🌱", points: 3 },
+                    { text: "depende del día, pero siempre fluye bien", emoji: "✨", points: 3 }
+                ]
+            },
+            {
+                tag: "10 • plan relajado",
+                shortLabel: "plan ideal",
+                question: "Si armáramos un plan relajado, ¿qué quedaría mejor con nuestra vibra?",
+                options: [
+                    { text: "escuchar música y platicar de todo", emoji: "🎶", points: 4 },
+                    { text: "ver algunos episodios de algo juntos", emoji: "🍿", points: 4 },
+                    { text: "salir por algo de tomar y caminar", emoji: "🧋", points: 4 },
+                    { text: "cualquier plan improvisado funciona", emoji: "🎲", points: 3 }
+                ]
+            },
+            {
+                tag: "11 • energía",
+                shortLabel: "tipo de energía",
+                question: "¿Cómo describirías la energía que transmito cuando hablamos?",
+                options: [
+                    { text: "tranquila y muy agradable", emoji: "🌸", points: 3 },
+                    { text: "divertida y con muy buen ritmo", emoji: "⚡", points: 4 },
+                    { text: "genuina, se siente muy real", emoji: "💎", points: 4 },
+                    { text: "una mezcla perfecta entre chill y divertida", emoji: "✨", points: 4 }
+                ]
+            },
+            {
+                tag: "12 • curiosidad",
+                shortLabel: "lo que llama la atención",
+                question: "¿Qué dirías que es lo que más te llama la atención de mi forma de ser?",
+                options: [
+                    { text: "tu sentido del humor", emoji: "😆", points: 3 },
+                    { text: "tus gustos musicales y de series", emoji: "💿", points: 4 },
+                    { text: "lo fácil que es hablar contigo", emoji: "💬", points: 4 },
+                    { text: "tu energía en general", emoji: "✨", points: 3 }
+                ]
+            },
+            {
+                tag: "13 • espontaneidad",
+                shortLabel: "momentos favs",
+                question: "¿Qué tipo de pláticas disfrutas más conmigo?",
+                options: [
+                    { text: "las que empiezan normal y terminan en cualquier tema", emoji: "🌀", points: 4 },
+                    { text: "cuando recomendamos canciones, series o cosas", emoji: "🎧", points: 4 },
+                    { text: "las de humor y bromas internas", emoji: "🤭", points: 3 },
+                    { text: "las pláticas nocturnas más tranquilas", emoji: "🌙", points: 4 }
+                ]
+            },
+            {
+                tag: "14 • sorpresa",
+                shortLabel: "algo inesperado",
+                question: "¿Hay algo de mí que te sorprendió para bien desde que nos conocemos?",
+                options: [
+                    { text: "lo rápido que conectamos", emoji: "🔗", points: 4 },
+                    { text: "que tenemos más en común de lo que pensaba", emoji: "🧩", points: 4 },
+                    { text: "tu forma de escuchar y poner atención a detalles", emoji: "👀", points: 4 },
+                    { text: "lo bien que la paso cuando hablamos", emoji: "☀️", points: 3 }
+                ]
+            },
+            {
+                tag: "15 • soundtrack 2",
+                shortLabel: "momento del día",
+                question: "¿En qué momento del día queda mejor platicar conmigo?",
+                options: [
+                    { text: "en la noche, ya todo tranquilo con música de fondo", emoji: "🎧", points: 4 },
+                    { text: "en la tarde para despejarme un rato", emoji: "🌤️", points: 3 },
+                    { text: "en cualquier momento del día cae bien", emoji: "✨", points: 4 },
+                    { text: "cuando ambos tenemos un rato libre para hablar largo", emoji: "⏳", points: 3 }
+                ]
+            },
+            {
+                tag: "16 • temporada",
+                shortLabel: "en qué etapa vamos",
+                question: "Si esto fuera una serie, ¿en qué parte de la temporada dirías que estamos?",
+                options: [
+                    { text: "en los primeros episodios donde todo se pone interesante", emoji: "📺", points: 4 },
+                    { text: "justo antes de que empiece el mejor arco", emoji: "🚀", points: 4 },
+                    { text: "en un episodio tranquilo pero muy bueno", emoji: "☕", points: 3 },
+                    { text: "apenas en el intro, falta lo mejor", emoji: "🌟", points: 4 }
+                ]
+            },
+            {
+                tag: "17 • percepción",
+                shortLabel: "en tres palabras",
+                question: "Si alguien te preguntara cómo soy, ¿qué sería lo primero que dirías?",
+                options: [
+                    { text: "alguien con muy buena vibra y súper agradable", emoji: "✨", points: 4 },
+                    { text: "alguien con excelentes gustos y buen humor", emoji: "💿", points: 4 },
+                    { text: "una persona con la que siempre dan ganas de hablar", emoji: "💬", points: 4 },
+                    { text: "alguien muy chill y fácil de tratar", emoji: "☁️", points: 3 }
+                ]
+            },
+            {
+                tag: "18 • conexión",
+                shortLabel: "tipo de conexión",
+                question: "Sinceramente, ¿sientes que tenemos una conexión distinta a la de cualquiera?",
+                options: [
+                    { text: "sí, se siente una sintonía muy natural", emoji: "💫", points: 4 },
+                    { text: "totalmente, no con cualquiera fluye así", emoji: "🔥", points: 4 },
+                    { text: "vamos construyendo algo muy bueno", emoji: "🌱", points: 3 },
+                    { text: "hay algo especial en cómo nos llevamos", emoji: "✨", points: 4 }
+                ]
+            },
+            {
+                tag: "19 • próximo paso",
+                shortLabel: "qué sigue",
+                question: "¿Qué te gustaría que pasara más seguido entre nosotros?",
+                options: [
+                    { text: "platicar aún más seguido", emoji: "💬", points: 4 },
+                    { text: "compartir más música, series y planes", emoji: "🎶", points: 4 },
+                    { text: "vernos o pasar más tiempo juntos", emoji: "🧋", points: 4 },
+                    { text: "seguir dejando que todo fluya así de bien", emoji: "🌊", points: 3 }
+                ]
+            },
+            {
+                tag: "20 • cierre",
+                shortLabel: "plan improvisado",
+                question: "Para cerrar: ¿qué plan improvisado sentirías que sale mejor entre nosotros?",
+                options: [
+                    { text: "ir por algo de tomar y platicar sin prisa", emoji: "🧋", points: 4 },
+                    { text: "poner música o ver algo tranquilo sin planear mucho", emoji: "🎧", points: 4 },
+                    { text: "caminar un rato y ver qué surge en el camino", emoji: "☁️", points: 3 },
+                    { text: "algo rápido entre pendientes del día", emoji: "⚡", points: 2 }
+                ]
+            }
+        ];
+
+        // Estado de la aplicación
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(quizData.length).fill(null);
+        let isTransitioning = false;
+
+        // Referencias al DOM
+        const welcomeScreen = document.getElementById('welcome-screen');
+        const quizScreen = document.getElementById('quiz-screen');
+        const resultScreen = document.getElementById('result-screen');
+
+        const startBtn = document.getElementById('start-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const restartBtn = document.getElementById('restart-btn');
+        const copyBtn = document.getElementById('copy-btn');
+        const whatsappBtn = document.getElementById('whatsapp-btn');
+
+        const progressText = document.getElementById('progress-text');
+        const progressBar = document.getElementById('progress-bar');
+        const questionContainer = document.getElementById('question-container');
+        const questionTag = document.getElementById('question-tag');
+        const questionTitle = document.getElementById('question-title');
+        const optionsList = document.getElementById('options-list');
+
+        const resultEmoji = document.getElementById('result-emoji');
+        const resultTitle = document.getElementById('result-title');
+        const resultDesc = document.getElementById('result-desc');
+        const summaryList = document.getElementById('summary-list');
+        const extraNoteInput = document.getElementById('extra-note');
+
+        const toast = document.getElementById('toast');
+        const toastIcon = document.getElementById('toast-icon');
+        const toastMsg = document.getElementById('toast-msg');
+        let toastTimeout;
+
+        /**
+         * Muestra una notificación flotante amigable en lugar de alert()
+         */
+        function showToast(message, icon = "✨") {
+            clearTimeout(toastTimeout);
+            toastIcon.textContent = icon;
+            toastMsg.textContent = message;
+            
+            toast.classList.remove('opacity-0', '-translate-y-4');
+            toast.classList.add('opacity-100', 'translate-y-0');
+
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', '-translate-y-4');
+            }, 3000);
+        }
+
+        /**
+         * Inicia el cuestionario desde la pantalla de bienvenida
+         */
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            userAnswers = new Array(quizData.length).fill(null);
+            welcomeScreen.classList.add('hidden');
+            resultScreen.classList.add('hidden');
+            quizScreen.classList.remove('hidden');
+            renderQuestion();
+        }
+
+        /**
+         * Renderiza la pregunta actual y sus opciones con animación fluida
+         */
+        function renderQuestion() {
+            const currentData = quizData[currentQuestionIndex];
+            
+            // Actualizar barra y texto de progreso
+            const progressPercent = ((currentQuestionIndex + 1) / quizData.length) * 100;
+            progressText.textContent = `${currentQuestionIndex + 1} / ${quizData.length}`;
+            progressBar.style.width = `${progressPercent}%`;
+
+            // Habilitar o deshabilitar botón "Atrás"
+            prevBtn.disabled = currentQuestionIndex === 0;
+
+            // Reiniciar animación del contenedor de pregunta
+            questionContainer.classList.remove('card-enter');
+            void questionContainer.offsetWidth; // Forzar reflow para reiniciar animación CSS
+            questionContainer.classList.add('card-enter');
+
+            // Actualizar textos
+            questionTag.textContent = currentData.tag;
+            questionTitle.textContent = currentData.question;
+
+            // Generar botones de opciones
+            optionsList.innerHTML = '';
+            currentData.options.forEach((option, idx) => {
+                const isSelected = userAnswers[currentQuestionIndex] && userAnswers[currentQuestionIndex].text === option.text;
+                
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = `option-btn w-full text-left p-4 rounded-2xl border-2 ${
+                    isSelected ? 'option-selected' : 'border-slate-100 bg-white/90'
+                } flex items-center justify-between gap-3 cursor-pointer group`;
+                
+                button.innerHTML = `
+                    <div class="flex items-center gap-3.5">
+                        <span class="flex-shrink-0 w-9 h-9 rounded-xl bg-slate-50 group-hover:bg-white flex items-center justify-center text-lg shadow-xs transition-colors">
+                            ${option.emoji}
+                        </span>
+                        <span class="font-medium text-sm sm:text-base text-slate-800 leading-snug">
+                            ${option.text}
+                        </span>
+                    </div>
+                    <div class="w-5 h-5 rounded-full border-2 flex-shrink-0 flex items-center justify-center transition-colors ${
+                        isSelected ? 'border-pink-500 bg-pink-500' : 'border-slate-300 group-hover:border-pink-300'
+                    }">
+                        ${isSelected ? '<div class="w-2 h-2 rounded-full bg-white"></div>' : ''}
+                    </div>
+                `;
+
+                button.addEventListener('click', () => handleOptionSelect(option, button));
+                optionsList.appendChild(button);
+            });
+        }
+
+        /**
+         * Maneja la selección de una respuesta y avanza automáticamente tras una breve pausa visual
+         */
+        function handleOptionSelect(option, selectedButton) {
+            if (isTransitioning) return;
+            isTransitioning = true;
+
+            // Guardar respuesta
+            userAnswers[currentQuestionIndex] = option;
+
+            // Marcar visualmente la opción seleccionada de inmediato
+            const allBtns = optionsList.querySelectorAll('button');
+            allBtns.forEach(btn => btn.classList.remove('option-selected'));
+            selectedButton.classList.add('option-selected');
+
+            // Avanzar a la siguiente pregunta o mostrar resultados
+            setTimeout(() => {
+                isTransitioning = false;
+                if (currentQuestionIndex < quizData.length - 1) {
+                    currentQuestionIndex++;
+                    renderQuestion();
+                } else {
+                    showResults();
+                }
+            }, 320);
+        }
+
+        /**
+         * Calcula el diagnóstico divertido basado en las 8 respuestas y muestra la pantalla final
+         */
+        function showResults() {
+            quizScreen.classList.add('hidden');
+            resultScreen.classList.remove('hidden');
+
+            // Calcular puntaje total (mínimo 20, máximo 80)
+            const totalScore = userAnswers.reduce((acc, item) => acc + (item ? item.points : 0), 0);
+
+            if (totalScore >= 70) {
+                resultEmoji.textContent = "🔥";
+                resultTitle.textContent = "sintonía en repeat ✨";
+                resultDesc.textContent = "como una canción de PinkPantheress que no puedes dejar de escuchar: la vibra fluye sola y hay muchísima buena energía.";
+            } else if (totalScore >= 55) {
+                resultEmoji.textContent = "🎧";
+                resultTitle.textContent = "playlist en perfecta sintonía 💫";
+                resultDesc.textContent = "tienen un ritmo súper cómodo y natural, se nota que comparten buen humor y gustos parecidos.";
+            } else {
+                resultEmoji.textContent = "☁️";
+                resultTitle.textContent = "vibra chill en progreso 🌱";
+                resultDesc.textContent = "apenas están armando su soundtrack y conociéndose, pero ya hay muy buena onda.";
+            }
+
+            // Construir resumen visual limpio
+            summaryList.innerHTML = '';
+            userAnswers.forEach((ans, idx) => {
+                const li = document.createElement('li');
+                li.className = "flex items-start justify-between gap-2 border-b border-slate-200/50 pb-1.5 last:border-none last:pb-0";
+                li.innerHTML = `
+                    <span class="text-slate-500 font-medium">${quizData[idx].shortLabel}:</span>
+                    <span class="text-slate-800 font-semibold text-right">${ans.text}</span>
+                `;
+                summaryList.appendChild(li);
+            });
+        }
+
+        /**
+         * Genera el texto formateado listo para compartir por WhatsApp o Instagram
+         */
+        function buildShareMessage() {
+            const title = resultTitle.textContent;
+            const extraNote = extraNoteInput.value.trim();
+
+            let message = `✨ *hice tu mini vibe check* ✨\n\n`;
+            message += `🎧 *resultado:* ${title}\n\n`;
+            message += `*mis respuestas:*\n`;
+
+            userAnswers.forEach((ans, idx) => {
+                message += `• *${quizData[idx].shortLabel}:* ${ans.text}\n`;
+            });
+
+            if (extraNote) {
+                message += `\n💌 *nota / canción:* "${extraNote}"\n`;
+            }
+
+            message += `\n¿tú qué habrías elegido? 👀`;
+            return message;
+        }
+
+        /**
+         * Copia el mensaje al portapapeles usando document.execCommand('copy') para máxima compatibilidad
+         */
+        function copyResultsToClipboard() {
+            try {
+                const textToCopy = buildShareMessage();
+                const textArea = document.createElement('textarea');
+                textArea.value = textToCopy;
+                
+                // Evitar scroll indeseado al añadir el textarea temporal
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-9999px';
+                textArea.style.top = '0';
+                document.body.appendChild(textArea);
+                
+                textArea.focus();
+                textArea.select();
+                
+                const successful = document.execCommand('copy');
+                document.body.removeChild(textArea);
+
+                if (successful) {
+                    showToast("¡Respuestas copiadas! Listas para pegar en el chat", "📋");
+                    // Feedback visual temporal en el botón
+                    const originalHTML = copyBtn.innerHTML;
+                    copyBtn.innerHTML = `<span>¡Respuestas copiadas! ✅</span>`;
+                    setTimeout(() => {
+                        copyBtn.innerHTML = originalHTML;
+                    }, 2200);
+                } else {
+                    showToast("No se pudo copiar automáticamente, intenta de nuevo", "⚠️");
+                }
+            } catch (err) {
+                console.error("Error al copiar:", err);
+                showToast("Hubo un detalle al copiar el texto", "⚠️");
+            }
+        }
+
+        /**
+         * Abre WhatsApp con el mensaje prellenado usando api.whatsapp.com/send
+         */
+        function sendViaWhatsApp() {
+            const textToShare = buildShareMessage();
+            const encodedText = encodeURIComponent(textToShare);
+            const whatsappUrl = `https://api.whatsapp.com/send?text=${encodedText}`;
+            window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+        }
+
+        // Asignación de eventos
+        startBtn.addEventListener('click', startQuiz);
+        
+        prevBtn.addEventListener('click', () => {
+            if (currentQuestionIndex > 0 && !isTransitioning) {
+                currentQuestionIndex--;
+                renderQuestion();
+            }
+        });
+
+        restartBtn.addEventListener('click', () => {
+            extraNoteInput.value = '';
+            resultScreen.classList.add('hidden');
+            welcomeScreen.classList.remove('hidden');
+        });
+
+        copyBtn.addEventListener('click', copyResultsToClipboard);
+        whatsappBtn.addEventListener('click', sendViaWhatsApp);
+    </script>
+</body>
+</html>
